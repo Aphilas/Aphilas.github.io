@@ -1,0 +1,11 @@
+#bio {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 900px) { 
+    #bio {
+        flex-wrap: nowrap;
+    }
+}
