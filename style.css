@@ -4,6 +4,10 @@
     flex-wrap: wrap;
 }
 
+canvas {
+    max-width: 100%;
+}
+
 @media (min-width: 900px) { 
     #bio {
         flex-wrap: nowrap;
