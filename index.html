@@ -52,48 +52,50 @@
         <h2>Projects</h2>
 
         <details>
-          <summary>Live</summary>
+          <summary><a href="https://litesiem.ml/about" target="_blank">LiteSiem</a> - a <abbr title="Security Information and Event Management">SIEM</abbr> tool loosely based on <a href="https://www.dsiem.org/">DSIEM</a> </summary>
 
           <p>
-            <ul>
-              <li>
-                <a href="https://chrome.google.com/webstore/detail/revr/chneiopmephgdhblkkhbapmniboajmao" target="_blank">Revr</a> 
-                - A paid web extension to provide utilities for Rev.com
-                [<a href="https://revr.ml/" target="_blank">Website</a>] 
-              </li>
-            </ul>
+            <a href="https://litesiem.nvll.ga/" target="_blank">Demo</a> <br>
+          </p>
+
+          <p>
+            Login with <code>demo@litesiem.nvll.ga</code>, password <code>demouser</code>. 
+            Try triggering an alarm with the following <code>curl</code> requests:
+
+<pre><code>
+curl -H 'Content-Type: application/json' \
+-d '{"timestamp":"'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'", "title":"ICMP Ping", "dst_ip":"127.0.0.1", "sensor":"'"$(hostname)"'", "protocol":"ICMP", "product":"IDS", "plugin_id":42, "plugin_sid":42 }' \
+https://litesiem.nvll.ga/_events/logs.demo/?[1-10]  
+</code></pre>
           </p>
         </details>
 
         <details>
-          <summary>Demos</summary>
+          <summary><a href="https://shoppy.nvll.ga/" target="_blank">Shoppy</a> - an Android app to estimate and track grocery expenses </summary>
+
+          <p>(unstable)</p>
+        </details>
+        
+        <details>
+          <summary>ContentEval - (internal) a web platform to evaluate educational content </summary>
 
           <p>
-            <ul>
-              <li><a href="https://voluntr.herokuapp.com/" target="_blank">Voluntr</a> 
-                - A job site for volunteers</li>
-            </ul>
+            <a href="https://eduvod.nvll.ga/" target="_blank">Demo</a> <br>
           </p>
+          
+          <p>Login with <code>demo@eduvod.co.ke</code>, password <code>iS9nQoW%QxPi</code>. </p>
         </details>
 
         <details>
-          <summary>Web utils</summary>
+          <summary><a href="https://revr.ml/" target="_blank">Revr</a> - a paid web extension to autoclaim transcription jobs and notify users</summary>
+          <p><a href="https://chrome.google.com/webstore/detail/revr/chneiopmephgdhblkkhbapmniboajmao" target="_blank">Chrome Webstore</a> (unmaintained)</p>
+        </details>
+        
+        <details>
+          <summary><a href="https://fast-note.netlify.app/" target="_blank">FastNote</a> - offline local notes in the browser </summary>
+
           <p>
-            <ul>
-              <li><a href="https://fast-note.netlify.app/" target="_blank">FastNote</a> 
-                - Minimalist canvas for local plain text notes in the browser
-                [<a href="https://github.com/aphilas/quick-note" target="_blank">Source</a>]
-              </li>
-              <li><a href="https://dstv-channels.netlify.app/" target="_blank">DSTV Channels</a> 
-                - A <abbr title="Progressive Web App">PWA </abbr> to look up 
-                <a href="https://www.dstv.com/en-ke" target="_blank">DSTV</a> channel numbers
-                [<a href="https://github.com/aphilas/dstv-channels" target="_blank">Source</a>]
-              </li>
-              <li><a href="https://colorboard.netlify.app/" target="_blank">ColorBoard</a>
-                - Manage a local moodboard of colors
-                [<a href="https://github.com/aphilas/colorboard">Source</a>]
-              </li>
-            </ul>
+            <a href="https://github.com/aphilas/quick-note" target="_blank">Source</a>
           </p>
         </details>
       </section>
