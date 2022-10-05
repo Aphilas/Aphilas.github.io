@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal website">
+
+<title>Neville Omangi</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/tailwind.css">
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+</head>
+
+<body> 
+  <nav class="px-4">
+  <ul>
+    <li>
+      <a href="/" class="secondary">
+        <strong>Neville Omangi</strong>
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="/#bio">Bio</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    
+    <li><a href="/posts">Posts</a></li>
+    <li><a 
+      href="https://docs.google.com/document/d/1r0hTXL7sNq7EnGPZNs5T8jXwqwEtJBMpi26Kk6EgkFQ/edit?usp=sharing"
+      class="external"
+    >Resume</a></li>
+  </ul>
+</nav>
+
+
+  <main class="container">
+    <section class="mx-auto max-w-[65ch] post">
+      <div>
+        <h1 class="">Javascript todo app for the absolute beginner</h1>
+        
+        <p>TLDR:</p>
+<ul>
+<li>Add a <code>&lt;li&gt;</code> element to a <code>&lt;ul&gt;</code>  list of todos when a <code>form</code> is submitted.</li>
+<li>Delete todos using an <code>onclick</code> handler.</li>
+</ul>
+<h2>Motives</h2>
+<p>After reading Chris Coyier's <a href="https://css-tricks.com/reduced-test-cases/">post on reduced test cases</a> I became intrigued with ways to simplify certain programming tasks (though the article is about something different). As it's often stated, the best way to write code is to write no code. At the present moment, we can not do away with code. However we can:</p>
+<ol>
+<li>Reduce the amount of code need to achieve an end</li>
+<li>Make code simpler to understand</li>
+</ol>
+<p>I am not a huge fan of using a nuclear bomb on an ant (i.e. a full-fledged framework on a simple task), so I'll stick to vanilla Javascript.</p>
+<h3>Why a todo app?</h3>
+<p>Working on projects is the best way to actually learn programming and break out of tutorial rut. And damn do I love todo apps! I am the kind of person who can't get anything done unless it's written down. Writing a todo app (for the umpteenth time) is always fun. Todo apps are often <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> i.e. involve operations to create, read, update and delete data.  Also, a lot of benchmarks for frameworks and introductory documentation for libraries use todo apps.</p>
+<h2>Objectives</h2>
+<p>By the end of this post, I hope that an absolute beginner can be able to:</p>
+<ul>
+<li>understand basic <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">DOM</a> manipulation using JavaScript</li>
+<li>code a basic JS CRUD app</li>
+</ul>
+<h2>Gotchas</h2>
+<p>Since this is meant to be simple to understand, there are some trade-offs that I had to make, including:</p>
+<ol>
+<li>Data is not separated from the UI</li>
+<li>Absolutely no validation or handling of edge cases and errors</li>
+</ol>
+<p>This might not be the simplest version out there, but I will update this post with any suggestions that makes the app simpler (and not necessarily with less code).</p>
+<h2>Prerequisites</h2>
+<ol>
+<li>Knowledege of HTML</li>
+<li>Knowledge of (basic) CSS</li>
+<li>Introductory knowledge in Javascript</li>
+</ol>
+<h2>Finally, code!</h2>
+<p>Note: I will be using some <a href="http://es6-features.org/#Constants">ES6</a> features.</p>
+<h3>HTML skeleton</h3>
+<p>Create a new file ideally using an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://www.sublimetext.com/">Sublime</a> (or any text editor for that matter). We'll start with a basic skeleton for the app.</p>
+<p>Write the following code:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Minimal JS todo app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- list of todos --&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Read Composing Software by Eric Elliot&lt;/li&gt;
+    &lt;li&gt;Take a walk&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Save the file as <code>&lt;todo-app&gt;.html</code> . Open the file in the browser.</p>
+<h3>Form to add todos</h3>
+<p>In order to add a todo, we'll get the text of the todo from a form. Let's create it:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- list of todos --&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Read Composing Software by Eric Elliot&lt;/li&gt;
+    &lt;li&gt;Take a walk&lt;/li&gt;
+  &lt;/ul&gt;
+    
+  &lt;!-- form to add todos --&gt;
+  &lt;form&gt;
+    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
+
+    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
+  &lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>Adding a todo</h3>
+<p>We will use ES6 <a href="http://es6-features.org/#StringInterpolation">string templates</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML"><code>innerHTML</code></a> property of DOM nodes to create the HTML.</p>
+<p>Here's where JavaScript drops in. We'll 'hijack' the submit event of the form then use the value of the text input as the todo text.</p>
+<p>Usually, submitting a form sends a request to the server and reloads the page. We will prevent that by  using the <code>preventDefault()</code> method of the event that's passed in as a parameter.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- list of todos --&gt;
+  &lt;ul id=&quot;todos&quot;&gt;&lt;/ul&gt;
+    
+  &lt;!-- form to add todos --&gt;
+  &lt;form id=&quot;todo-form&quot;&gt;
+    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
+
+    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
+  &lt;/form&gt;
+    
+  &lt;script&gt;
+    // 'select' elements
+  	const todoForm = document.getElementById('todo-form')
+    const todoInput = document.getElementById('todo-input')
+    const todosList = document.getElementById('todos')
+
+    // whenever the form is submitted, our arrow function 'event =&gt; { ... }' runs
+    todoForm.addEventListener('submit', event =&gt; {
+        
+      // prevent page reload
+      event.preventDefault()
+
+      // create a &lt;li&gt; element
+      const todoEl = document.createElement('li')
+      
+      // parse the value of the text input
+      todoEl.innerHTML = `&lt;span&gt;${todoInput.value}&lt;/span&gt;`
+      
+      // add &lt;li&gt; to &lt;ul&gt;
+      todosList.appendChild(todoEl)
+    })
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Refresh the page and confirm you can add a todo. If so, yay!</p>
+<h4>Styling the list</h4>
+<p>Let's remove the list marker.</p>
+<p>Add the following CSS styles to the <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
+    
+  &lt;style&gt;
+    #todos {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- rest of code --&gt;
+&lt;/body&gt;
+</code></pre>
+<h3>Marking a todo as done/not done</h3>
+<p>We will use a check-box to mark a todo as done or not done, and then use CSS to strike-through todos that are marked as done.</p>
+<p>We will modify the todo template to add the check-box,</p>
+<pre><code class="language-js">todoEl.innerHTML = `
+  &lt;input type=&quot;checkbox&quot;&gt;
+  &lt;span&gt;${todoInput.value}&lt;/span&gt;
+`
+</code></pre>
+<p>and then style accordingly:</p>
+<pre><code class="language-html">&lt;style&gt;
+    #todos {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    /* if a checkbox is checked, strikethrough the sibling span element */
+    input[type=checkbox]:checked + span {
+      text-decoration: line-through;
+    }
+&lt;/style&gt;
+</code></pre>
+<p>Save the file, and then refresh the page. Add a todo item and then click on the checkbox to mark it as done.</p>
+<h3>Editing a todo</h3>
+<p>This is where I had to cheat so as not to complicate things : ). The <code>contenteditable</code> attribute indicates whether an element can be edited by the user.</p>
+<p>Still on the todo template:</p>
+<pre><code class="language-js">todoEl.innerHTML = `
+  &lt;input type=&quot;checkbox&quot;&gt;
+  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
+`
+</code></pre>
+<p>Add a todo. Click on the todo text. Edit the text. Click outside the widget.</p>
+<h3>Deleting a todo</h3>
+<p>This might be a bit tougher to wrap your head around.</p>
+<p>Let's add a button to the todo template.</p>
+<pre><code class="language-js">todoEl.innerHTML = `
+  &lt;input type=&quot;checkbox&quot;&gt;
+  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
+  &lt;button&gt;Delete&lt;/button&gt;
+`
+</code></pre>
+<p>Finally, the functionality:</p>
+<pre><code class="language-js">todoEl.innerHTML = `
+  &lt;input type=&quot;checkbox&quot;&gt;
+  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
+  &lt;button onclick=&quot;this.parentNode.remove()&quot;&gt;Delete&lt;/button&gt;
+`
+</code></pre>
+<p>We add an <code>onclick</code> event listener to the button. Then we can access the current element (the button), using the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/this">dreaded <code>this</code></a>. In short, <code>this</code> in JavaScript represents the current execution context. In this case, <code>this</code> refers to the <code>&lt;button&gt;</code>. After accessing the button, we can access it's parent element, the <code>&lt;li&gt;</code> using the <code>parentNode</code> property. We can then simply remove the todo from the UI using the <code>remove()</code> method of the <code>&lt;li&gt;</code>.</p>
+<p>Save the file then refresh the page in the browser. Add a todo, then click on the <code>Delete</code> button. If it works, congrats.</p>
+<h3>Complete code</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Minimal JS todo app&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;style&gt;
+  #todos {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  /* if a checkbox is chcked, strikethrough the sibling span element */
+  input[type=checkbox]:checked + span {
+    text-decoration: line-through;
+  }
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;!-- list of todos --&gt;
+  &lt;ul id=&quot;todos&quot;&gt;&lt;/ul&gt;
+    
+  &lt;!-- form to add todos --&gt;
+  &lt;form id=&quot;todo-form&quot;&gt;
+    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
+
+    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
+  &lt;/form&gt;
+    
+  &lt;script&gt;
+    // 'select' elements
+  	const todoForm = document.getElementById('todo-form')
+    const todoInput = document.getElementById('todo-input')
+    const todosList = document.getElementById('todos')
+
+    // whenever the form is submitted, our arrow function 'event =&gt; { ... }' runs
+    todoForm.addEventListener('submit', event =&gt; {
+        
+      // prevent page reload
+      event.preventDefault()
+
+      // create a &lt;li&gt; element
+      const todoEl = document.createElement('li')
+      
+      // todo template
+      todoEl.innerHTML = `
+        &lt;input type=&quot;checkbox&quot;&gt;
+        &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
+        &lt;button onclick=&quot;this.parentNode.remove()&quot;&gt;Delete&lt;/button&gt;
+      `
+      
+      // add &lt;li&gt; to &lt;ul&gt;
+      todosList.appendChild(todoEl)
+    })
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2>Conclusion</h2>
+<p>Thanks for reading to the end of the article. This is my first ever article. If you have any suggestions, typos, et cetera, be sure to leave a comment or shoot me an <a href="mailto:nevilleomangi@gmil.com">email</a>.</p>
+<p>Shoutout to <a href="https://yazeedb.com/">Yazeed Bzadough</a> for getting me started on this path of creating through his awesome blog.</p>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+  <p>
+    <small>  
+      <a href="https://mastodon.online/@aphilas">Mastodon</a>  • 
+      <a href="https://github.com/aphilas">GitHub</a> • 
+      <a href="mailto:nevilleomangi@gmail.com">Email</a> •   
+      <a href="https://www.linkedin.com/in/neville-omangi-62b290173/">LinkedIn</a>
+    </small>
+  </p>
+
+  <p>
+    <small>
+        <span class="inline-block rotate-180">&copy;</span>
+        2022 Neville Omangi. No rights reserved.
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>

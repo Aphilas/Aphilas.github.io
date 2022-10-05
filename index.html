@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal website">
+
+<title>Neville Omangi</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/tailwind.css">
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+  <script src="https://cdn.jsdelivr.net/gh/aphilas/game-of-life/main.js" defer></script>
+</head>
+
+<body>
+  <nav class="px-4">
+  <ul>
+    <li>
+      <a href="/" class="secondary">
+        <strong>Neville Omangi</strong>
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="/#bio">Bio</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    
+    <li><a href="/posts">Posts</a></li>
+    <li><a 
+      href="https://docs.google.com/document/d/1r0hTXL7sNq7EnGPZNs5T8jXwqwEtJBMpi26Kk6EgkFQ/edit?usp=sharing"
+      class="external"
+    >Resume</a></li>
+  </ul>
+</nav>
+
+
+  <main class="container">
+      <section id="bio" class="flex gap-2 flex-wrap lg:flex-nowrap">
+        <canvas class="max-w-full"></canvas>
+
+        <div class="lg:pl-8">
+          <h2>Bio</h2>
+          
+          <p>
+            I am a fullstack developer transitioning into backend development. 
+            TypeScript, Python and Go have been my most recent <i>exploits</i>.
+            I am also interested in distributed systems. 
+          </p>
+
+          <p>Currently open to interviews for an entry-level Fullstack/Backend Engineering role.</p>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+
+        <details>
+          <summary><a href="https://litesiem.ml/about" target="_blank">LiteSiem</a> - a <abbr title="Security Information and Event Management">SIEM</abbr> tool loosely based on <a href="https://www.dsiem.org/">DSIEM</a> </summary>
+
+          <p>
+            <a href="https://litesiem.nvll.ga/" target="_blank">Demo</a> <br>
+          </p>
+
+          <p>
+            Login with <code>demo@litesiem.nvll.ga</code>, password <code>demouser</code>. 
+            Try triggering an alarm with the following <code>curl</code> requests:
+
+<pre><code>
+curl -H 'Content-Type: application/json' \
+-d '{"timestamp":"'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'", "title":"ICMP Ping", "dst_ip":"127.0.0.1", "sensor":"'"$(hostname)"'", "protocol":"ICMP", "product":"IDS", "plugin_id":42, "plugin_sid":42 }' \
+https://litesiem.nvll.ga/_events/logs.demo/?[1-10]  
+</code></pre>
+          </p>
+        </details>
+
+        <details>
+          <summary><a href="https://shoppy.nvll.ga/" target="_blank">Shoppy</a> - an Android app to estimate and track grocery expenses </summary>
+
+          <p>(unstable)</p>
+        </details>
+        
+        <details>
+          <summary>ContentEval - (internal) a web platform to evaluate educational content </summary>
+
+          <p>
+            <a href="https://eduvod.nvll.ga/" target="_blank">Demo</a> <br>
+          </p>
+          
+          <p>Login with <code>demo@eduvod.co.ke</code>, password <code>iS9nQoW%QxPi</code>. </p>
+        </details>
+
+        <details>
+          <summary><a href="https://revr.ml/" target="_blank">Revr</a> - a paid web extension to autoclaim transcription jobs and notify users</summary>
+          <p><a href="https://chrome.google.com/webstore/detail/revr/chneiopmephgdhblkkhbapmniboajmao" target="_blank">Chrome Webstore</a> (unmaintained)</p>
+        </details>
+        
+        <details>
+          <summary><a href="https://fast-note.netlify.app/" target="_blank">FastNote</a> - offline local notes in the browser </summary>
+
+          <p>
+            <a href="https://github.com/aphilas/quick-note" target="_blank">Source</a>
+          </p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="container">
+  <p>
+    <small>  
+      <a href="https://mastodon.online/@aphilas">Mastodon</a>  • 
+      <a href="https://github.com/aphilas">GitHub</a> • 
+      <a href="mailto:nevilleomangi@gmail.com">Email</a> •   
+      <a href="https://www.linkedin.com/in/neville-omangi-62b290173/">LinkedIn</a>
+    </small>
+  </p>
+
+  <p>
+    <small>
+        <span class="inline-block rotate-180">&copy;</span>
+        2022 Neville Omangi. No rights reserved.
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>
