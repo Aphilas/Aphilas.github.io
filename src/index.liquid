@@ -1,41 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neville Omangi</title>
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/gh/aphilas/game-of-life/main.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul>
-          <li><strong>Neville Omangi</strong></li>
-        </ul>
-        <ul>
-          <li><a href="#bio">Bio</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#links">Links</a></li>
-          <li><a href="https://docs.google.com/document/d/1r0hTXL7sNq7EnGPZNs5T8jXwqwEtJBMpi26Kk6EgkFQ/edit?usp=sharing">Resume</a></li>
-          <!-- <li><a href="#" title="Coming soon!">Blog</a></li> -->
-        </ul>
-      </nav>
-    </header>
+<head>
+  {% include head-content.liquid %}
+  <script src="https://cdn.jsdelivr.net/gh/aphilas/game-of-life/main.js" defer></script>
+</head>
 
-    <main>
-      
-      <section id="bio">
-        <canvas></canvas>
+<body>
+  {% include header.liquid %}
 
-        <div>
+  <main class="container">
+      <section id="bio" class="flex gap-2 flex-wrap lg:flex-nowrap">
+        <canvas class="max-w-full"></canvas>
+
+        <div class="lg:pl-8">
           <h2>Bio</h2>
           
           <p>
@@ -99,24 +76,8 @@ https://litesiem.nvll.ga/_events/logs.demo/?[1-10]
           </p>
         </details>
       </section>
-
-      <section id="links">
-        <h2>Links</h2>
-
-        <p>
-          <ul>
-            <li><a href="https://github.com/aphilas">GitHub</a></li>
-            <li><a href="mailto:nevilleomangi@gmail.com">Email</a></li>
-            <li><a href="https://www.linkedin.com/in/neville-omangi-62b290173/">LinkedIn</a></li>
-          </ul>
-        </p>
-      </section>
     </main>
-    
-    <footer>
-      <p>
-        <span class="copyleft">&copy;</span> 2022 Neville Omangi. No rights reserved.
-      </p>
-    </footer>
-  </body>
+
+    {% include footer.liquid %}
+</body>
 </html>

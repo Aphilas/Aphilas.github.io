@@ -1,0 +1,58 @@
+---
+pagination: 
+  data: collections.post
+  size: 5
+  alias: posts
+  reverse: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head-content.liquid %}
+</head>
+
+<body class="min-h-screen flex flex-col">
+  {% include header.liquid %}
+
+  <main class="container flex-grow">
+    <h2>Posts</h2>
+
+    {% if posts.size > 0 %}
+      <ul class="">
+        {%- for post in posts %}
+          <li class="list-none">
+              <small class="mb-4">
+                <span>
+                  {{- post.data.date | htmlDateString -}}
+                </span>
+                
+                <a href="{{- post.url -}}" class="secondary">
+                  {{- post.data.title -}}
+                </a>
+              </small>
+
+            {%- if post.data.extract -%}
+              <p class="mb-2">{{ post.data.extract }}...</p>
+            {%- endif -%}
+          </li>
+        {%- endfor %}
+      </ul>
+    {% else %}
+      <p>More posts will be up soon!</p>
+    {% endif %}
+
+    <p>
+      {%- if pagination.href.previous  %}
+        <a href="{{ pagination.href.previous }}">< Previous Page</a>
+      {% endif -%}
+
+      {%- if pagination.href.next  %}
+        <a href="{{ pagination.href.next }}">Next Page ></a>
+      {% endif -%}
+    </p>
+  </main>
+
+  {% include footer.liquid %}
+</body>
+</html>
