@@ -14,7 +14,9 @@
 <link rel="manifest" href="/site.webmanifest">
 
 <link rel="stylesheet" href="/css/tailwind.css">
+<link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+<link href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
 
 </head>
 
@@ -84,224 +86,47 @@
 <h3>HTML skeleton</h3>
 <p>Create a new file ideally using an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> such as <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://www.sublimetext.com/">Sublime</a> (or any text editor for that matter). We'll start with a basic skeleton for the app.</p>
 <p>Write the following code:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Minimal JS todo app&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-  &lt;!-- list of todos --&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Read Composing Software by Eric Elliot&lt;/li&gt;
-    &lt;li&gt;Take a walk&lt;/li&gt;
-  &lt;/ul&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Minimal JS todo app<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br><br>  <span class="token comment">&lt;!-- list of todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Read Composing Software by Eric Elliot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Take a walk<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><br><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>Save the file as <code>&lt;todo-app&gt;.html</code> . Open the file in the browser.</p>
 <h3>Form to add todos</h3>
 <p>In order to add a todo, we'll get the text of the todo from a form. Let's create it:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-  &lt;!-- list of todos --&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Read Composing Software by Eric Elliot&lt;/li&gt;
-    &lt;li&gt;Take a walk&lt;/li&gt;
-  &lt;/ul&gt;
-    
-  &lt;!-- form to add todos --&gt;
-  &lt;form&gt;
-    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
-    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
-
-    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
-  &lt;/form&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>TLDR JS todo app<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br><br>  <span class="token comment">&lt;!-- list of todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Read Composing Software by Eric Elliot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Take a walk<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><br>    <br>  <span class="token comment">&lt;!-- form to add todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Todo:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Add<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><br><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <h3>Adding a todo</h3>
 <p>We will use ES6 <a href="http://es6-features.org/#StringInterpolation">string templates</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML"><code>innerHTML</code></a> property of DOM nodes to create the HTML.</p>
 <p>Here's where JavaScript drops in. We'll 'hijack' the submit event of the form then use the value of the text input as the todo text.</p>
 <p>Usually, submitting a form sends a request to the server and reloads the page. We will prevent that by  using the <code>preventDefault()</code> method of the event that's passed in as a parameter.</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- list of todos --&gt;
-  &lt;ul id=&quot;todos&quot;&gt;&lt;/ul&gt;
-    
-  &lt;!-- form to add todos --&gt;
-  &lt;form id=&quot;todo-form&quot;&gt;
-    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
-    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
-
-    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
-  &lt;/form&gt;
-    
-  &lt;script&gt;
-    // 'select' elements
-  	const todoForm = document.getElementById('todo-form')
-    const todoInput = document.getElementById('todo-input')
-    const todosList = document.getElementById('todos')
-
-    // whenever the form is submitted, our arrow function 'event =&gt; { ... }' runs
-    todoForm.addEventListener('submit', event =&gt; {
-        
-      // prevent page reload
-      event.preventDefault()
-
-      // create a &lt;li&gt; element
-      const todoEl = document.createElement('li')
-      
-      // parse the value of the text input
-      todoEl.innerHTML = `&lt;span&gt;${todoInput.value}&lt;/span&gt;`
-      
-      // add &lt;li&gt; to &lt;ul&gt;
-      todosList.appendChild(todoEl)
-    })
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>TLDR JS todo app<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>  <span class="token comment">&lt;!-- list of todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todos<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><br>    <br>  <span class="token comment">&lt;!-- form to add todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Todo:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Add<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><br>    <br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>    <span class="token comment">// 'select' elements</span><br>  	<span class="token keyword">const</span> todoForm <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todo-form'</span><span class="token punctuation">)</span><br>    <span class="token keyword">const</span> todoInput <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todo-input'</span><span class="token punctuation">)</span><br>    <span class="token keyword">const</span> todosList <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todos'</span><span class="token punctuation">)</span><br><br>    <span class="token comment">// whenever the form is submitted, our arrow function 'event => { ... }' runs</span><br>    todoForm<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>        <br>      <span class="token comment">// prevent page reload</span><br>      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>      <span class="token comment">// create a &lt;li> element</span><br>      <span class="token keyword">const</span> todoEl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><br>      <br>      <span class="token comment">// parse the value of the text input</span><br>      todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;span></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span></span><span class="token template-punctuation string">`</span></span><br>      <br>      <span class="token comment">// add &lt;li> to &lt;ul></span><br>      todosList<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>todoEl<span class="token punctuation">)</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><br>  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>Refresh the page and confirm you can add a todo. If so, yay!</p>
 <h4>Styling the list</h4>
 <p>Let's remove the list marker.</p>
 <p>Add the following CSS styles to the <code>&lt;head&gt;</code>:</p>
-<pre><code class="language-html">&lt;head&gt;
-  &lt;title&gt;TLDR JS todo app&lt;/title&gt;
-    
-  &lt;style&gt;
-    #todos {
-      list-style-type: none;
-      padding-left: 0;
-    }
-  &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- rest of code --&gt;
-&lt;/body&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>TLDR JS todo app<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br>    <br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css"><br>    <span class="token selector">#todos</span> <span class="token punctuation">{</span><br>      <span class="token property">list-style-type</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br>      <span class="token property">padding-left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>  <span class="token comment">&lt;!-- rest of code --></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
 <h3>Marking a todo as done/not done</h3>
 <p>We will use a check-box to mark a todo as done or not done, and then use CSS to strike-through todos that are marked as done.</p>
 <p>We will modify the todo template to add the check-box,</p>
-<pre><code class="language-js">todoEl.innerHTML = `
-  &lt;input type=&quot;checkbox&quot;&gt;
-  &lt;span&gt;${todoInput.value}&lt;/span&gt;
-`
-</code></pre>
+<pre class="language-js"><code class="language-js">todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>  &lt;input type="checkbox"><br>  &lt;span></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span><br></span><span class="token template-punctuation string">`</span></span></code></pre>
 <p>and then style accordingly:</p>
-<pre><code class="language-html">&lt;style&gt;
-    #todos {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    
-    /* if a checkbox is checked, strikethrough the sibling span element */
-    input[type=checkbox]:checked + span {
-      text-decoration: line-through;
-    }
-&lt;/style&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css"><br>    <span class="token selector">#todos</span> <span class="token punctuation">{</span><br>      <span class="token property">list-style-type</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br>      <span class="token property">padding-left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>    <br>    <span class="token comment">/* if a checkbox is checked, strikethrough the sibling span element */</span><br>    <span class="token selector">input[type=checkbox]:checked + span</span> <span class="token punctuation">{</span><br>      <span class="token property">text-decoration</span><span class="token punctuation">:</span> line-through<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
 <p>Save the file, and then refresh the page. Add a todo item and then click on the checkbox to mark it as done.</p>
 <h3>Editing a todo</h3>
 <p>This is where I had to cheat so as not to complicate things : ). The <code>contenteditable</code> attribute indicates whether an element can be edited by the user.</p>
 <p>Still on the todo template:</p>
-<pre><code class="language-js">todoEl.innerHTML = `
-  &lt;input type=&quot;checkbox&quot;&gt;
-  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
-`
-</code></pre>
+<pre class="language-js"><code class="language-js">todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>  &lt;input type="checkbox"><br>  &lt;span contenteditable="true"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span><br></span><span class="token template-punctuation string">`</span></span></code></pre>
 <p>Add a todo. Click on the todo text. Edit the text. Click outside the widget.</p>
 <h3>Deleting a todo</h3>
 <p>This might be a bit tougher to wrap your head around.</p>
 <p>Let's add a button to the todo template.</p>
-<pre><code class="language-js">todoEl.innerHTML = `
-  &lt;input type=&quot;checkbox&quot;&gt;
-  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
-  &lt;button&gt;Delete&lt;/button&gt;
-`
-</code></pre>
+<pre class="language-js"><code class="language-js">todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>  &lt;input type="checkbox"><br>  &lt;span contenteditable="true"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span><br>  &lt;button>Delete&lt;/button><br></span><span class="token template-punctuation string">`</span></span></code></pre>
 <p>Finally, the functionality:</p>
-<pre><code class="language-js">todoEl.innerHTML = `
-  &lt;input type=&quot;checkbox&quot;&gt;
-  &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
-  &lt;button onclick=&quot;this.parentNode.remove()&quot;&gt;Delete&lt;/button&gt;
-`
-</code></pre>
+<pre class="language-js"><code class="language-js">todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>  &lt;input type="checkbox"><br>  &lt;span contenteditable="true"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span><br>  &lt;button onclick="this.parentNode.remove()">Delete&lt;/button><br></span><span class="token template-punctuation string">`</span></span></code></pre>
 <p>We add an <code>onclick</code> event listener to the button. Then we can access the current element (the button), using the <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/this">dreaded <code>this</code></a>. In short, <code>this</code> in JavaScript represents the current execution context. In this case, <code>this</code> refers to the <code>&lt;button&gt;</code>. After accessing the button, we can access it's parent element, the <code>&lt;li&gt;</code> using the <code>parentNode</code> property. We can then simply remove the todo from the UI using the <code>remove()</code> method of the <code>&lt;li&gt;</code>.</p>
 <p>Save the file then refresh the page in the browser. Add a todo, then click on the <code>Delete</code> button. If it works, congrats.</p>
 <h3>Complete code</h3>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;Minimal JS todo app&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;style&gt;
-  #todos {
-    list-style-type: none;
-    padding-left: 0;
-  }
-
-  /* if a checkbox is chcked, strikethrough the sibling span element */
-  input[type=checkbox]:checked + span {
-    text-decoration: line-through;
-  }
-&lt;/style&gt;
-&lt;body&gt;
-  &lt;!-- list of todos --&gt;
-  &lt;ul id=&quot;todos&quot;&gt;&lt;/ul&gt;
-    
-  &lt;!-- form to add todos --&gt;
-  &lt;form id=&quot;todo-form&quot;&gt;
-    &lt;label for=&quot;todo-input&quot;&gt;Todo:&lt;/label&gt;
-    &lt;input type=&quot;text&quot; id=&quot;todo-input&quot;&gt;
-
-    &lt;input type=&quot;submit&quot; value=&quot;Add&quot;&gt;
-  &lt;/form&gt;
-    
-  &lt;script&gt;
-    // 'select' elements
-  	const todoForm = document.getElementById('todo-form')
-    const todoInput = document.getElementById('todo-input')
-    const todosList = document.getElementById('todos')
-
-    // whenever the form is submitted, our arrow function 'event =&gt; { ... }' runs
-    todoForm.addEventListener('submit', event =&gt; {
-        
-      // prevent page reload
-      event.preventDefault()
-
-      // create a &lt;li&gt; element
-      const todoEl = document.createElement('li')
-      
-      // todo template
-      todoEl.innerHTML = `
-        &lt;input type=&quot;checkbox&quot;&gt;
-        &lt;span contenteditable=&quot;true&quot;&gt;${todoInput.value}&lt;/span&gt;
-        &lt;button onclick=&quot;this.parentNode.remove()&quot;&gt;Delete&lt;/button&gt;
-      `
-      
-      // add &lt;li&gt; to &lt;ul&gt;
-      todosList.appendChild(todoEl)
-    })
-  &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre class="language-html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Minimal JS todo app<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span><br><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css"><br>  <span class="token selector">#todos</span> <span class="token punctuation">{</span><br>    <span class="token property">list-style-type</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br>    <span class="token property">padding-left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br><br>  <span class="token comment">/* if a checkbox is chcked, strikethrough the sibling span element */</span><br>  <span class="token selector">input[type=checkbox]:checked + span</span> <span class="token punctuation">{</span><br>    <span class="token property">text-decoration</span><span class="token punctuation">:</span> line-through<span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span><br>  <span class="token comment">&lt;!-- list of todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todos<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span><br>    <br>  <span class="token comment">&lt;!-- form to add todos --></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-form<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Todo:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>todo-input<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Add<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span><br>    <br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"><br>    <span class="token comment">// 'select' elements</span><br>  	<span class="token keyword">const</span> todoForm <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todo-form'</span><span class="token punctuation">)</span><br>    <span class="token keyword">const</span> todoInput <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todo-input'</span><span class="token punctuation">)</span><br>    <span class="token keyword">const</span> todosList <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'todos'</span><span class="token punctuation">)</span><br><br>    <span class="token comment">// whenever the form is submitted, our arrow function 'event => { ... }' runs</span><br>    todoForm<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'submit'</span><span class="token punctuation">,</span> <span class="token parameter">event</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>        <br>      <span class="token comment">// prevent page reload</span><br>      event<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br>      <span class="token comment">// create a &lt;li> element</span><br>      <span class="token keyword">const</span> todoEl <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><br>      <br>      <span class="token comment">// todo template</span><br>      todoEl<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"><br>        &lt;input type="checkbox"><br>        &lt;span contenteditable="true"></span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>todoInput<span class="token punctuation">.</span>value<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&lt;/span><br>        &lt;button onclick="this.parentNode.remove()">Delete&lt;/button><br>      </span><span class="token template-punctuation string">`</span></span><br>      <br>      <span class="token comment">// add &lt;li> to &lt;ul></span><br>      todosList<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>todoEl<span class="token punctuation">)</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><br>  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <h2>Conclusion</h2>
 <p>Thanks for reading to the end of the article. This is my first ever article. If you have any suggestions, typos, et cetera, be sure to leave a comment or shoot me an <a href="mailto:nevilleomangi@gmil.com">email</a>.</p>
 <p>Shoutout to <a href="https://yazeedb.com/">Yazeed Bzadough</a> for getting me started on this path of creating through his awesome blog.</p>
+
 
       </div>
     </section>

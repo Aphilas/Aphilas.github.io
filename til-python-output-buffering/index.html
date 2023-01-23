@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal website">
+
+<title>Neville Omangi</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/tailwind.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+<link href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+
+</head>
+
+<body> 
+  <nav class="px-4">
+  <ul>
+    <li>
+      <a href="/" class="secondary">
+        <strong>Neville Omangi</strong>
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="/#bio">Bio</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    
+    <li><a href="/posts">Posts</a></li>
+    <li><a 
+      href="https://docs.google.com/document/d/1r0hTXL7sNq7EnGPZNs5T8jXwqwEtJBMpi26Kk6EgkFQ/edit?usp=sharing"
+      class="external"
+    >Resume</a></li>
+  </ul>
+</nav>
+
+
+  <main class="container">
+    <section class="mx-auto max-w-[65ch] post">
+      <div>
+        <h1 class="">TIL: Python Output Buffering</h1>
+        
+        <p>I created a simple Python service, and was manually monitoring it using logs. I had both a <code>FileHandler</code> and a <code>StreamHandler(sys.stdout)</code>. Later I had to Dockerize the service, mostly as a not-well-thought-out way to manage Python versions. I hit my first hitch when I discovered <a href="https://pythonspeed.com/articles/alpine-docker-python/">it's too much trouble</a> to use Alpine Linux for Python builds. When that was resolved by switching to <a href="https://hub.docker.com/_/python">Debian</a>, the logs took forever to show up and <code>docker compose logs</code> would yield nothing for a while.</p>
+<p>A quick search <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> showed that Python buffers output such as <code>stdout</code> and when writing to a file for performance reasons. So the <code>logging</code> or <code>print</code> statements would not show up until the buffer was full. My solution was to simply add the <code>-u</code> flag to the script invokation: <code>python -u main.py</code>. A few other solutions have been offered on StackOverflow <sup class="footnote-ref"><a href="#fn1" id="fnref1:1">[1:1]</a></sup> such as the <code>PYTHONUNBUFFERED=1</code> environment variable. This &quot;issue&quot; showed up when running a daemonized Docker container (read <code>docker compose up -d</code>) since Python detects if a tty is attached and disables block buffering*. Tangetially, I do remember using the <code>flush=True</code> keyword argument with <code>print</code> some time back, but I can't remember why I used it.</p>
+<p>See also:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/230751/how-can-i-flush-the-output-of-the-print-function">How can I flush the output of the print function?</a></li>
+<li><a href="https://stackoverflow.com/questions/29663459/python-app-does-not-print-anything-when-running-detached-in-docker">Python app does not print anything when running detached in docker</a></li>
+<li><a href="https://github.com/moby/moby/issues/12447">moby/moby#12447</a></li>
+</ul>
+<p>* Reference needed</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="https://stackoverflow.com/questions/107705/disable-output-buffering">https://stackoverflow.com/questions/107705/disable-output-buffering</a> <a href="#fnref1" class="footnote-backref">↩︎</a> <a href="#fnref1:1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="https://adamj.eu/tech/2020/06/26/how-to-check-if-pythons-output-buffering-is-enabled/">https://adamj.eu/tech/2020/06/26/how-to-check-if-pythons-output-buffering-is-enabled/</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+  <p>
+    <small>  
+      <a href="https://mastodon.online/@aphilas">Mastodon</a>  • 
+      <a href="https://github.com/aphilas">GitHub</a> • 
+      <a href="mailto:nevilleomangi@gmail.com">Email</a> •   
+      <a href="https://www.linkedin.com/in/neville-omangi-62b290173/">LinkedIn</a>
+    </small>
+  </p>
+
+  <p>
+    <small>
+        <span class="inline-block rotate-180">&copy;</span>
+        2022 Neville Omangi. No rights reserved.
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>
