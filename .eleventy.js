@@ -1,29 +1,42 @@
 const { DateTime } = require("luxon")
+const markdownIt = require("markdown-it")
+const markdownItFootnote = require("markdown-it-footnote")
+const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight')
 
-module.exports = function(eleventyConfig) {
-  eleventyConfig.setDataDeepMerge(true)
+module.exports = function(config) {
+  config.setDataDeepMerge(true)
 
-  eleventyConfig.addWatchTarget('src/css/tailwind.css')
-  eleventyConfig.addWatchTarget('tailwindconfig.js')
+  config.addWatchTarget('src/css/tailwind.css')
+  config.addWatchTarget('tailwindconfig.js')
   
-  eleventyConfig.addPassthroughCopy({ 'assets': '.' })
-  eleventyConfig.addPassthroughCopy('src/css/!(tailwind).css')
+  config.addPassthroughCopy({ 'assets': '.' })
+  config.addPassthroughCopy('src/css/!(tailwind).css')
   // eleventyConfig.addPassthroughCopy('src/img')
 
-  eleventyConfig.setTemplateFormats("html,liquid,md")
+  config.setTemplateFormats("html,liquid,md")
 
-  eleventyConfig.setLiquidOptions({
+  config.setLiquidOptions({
     dynamicPartials: false,
   })
 
-  eleventyConfig.addFilter("readableDate", dateObj => {
+  config.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
-  });
+  })
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+  config.addFilter('htmlDateString', (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
-  });
+  })
+
+  const markdownItOptions = {
+    html: true, // Enable HTML tags in source
+    breaks: true,  // Convert '\n' in paragraphs into <br>
+    linkify: true
+  }
+
+  config.setLibrary("md", markdownIt(markdownItOptions).use(markdownItFootnote))
+
+  config.addPlugin(syntaxHighlight)
 
   return {
     dir: {

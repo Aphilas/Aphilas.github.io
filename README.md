@@ -3,5 +3,6 @@
 This repo contains code for my personal website.
 
 ## TODO
-
-- [ ] Add syntax highlighting
+- [ ] Render tags
+- [x] Add footnotes
+- [x] Add syntax highlighting

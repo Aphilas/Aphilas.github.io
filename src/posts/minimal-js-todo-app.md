@@ -1,6 +1,9 @@
 ---
 title: Javascript todo app for the absolute beginner 
 date: 2019-10-02
+tags:
+- tutorial
+- javascript
 ---
 
 TLDR:
