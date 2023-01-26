@@ -29,18 +29,17 @@
         <h2>Projects</h2>
 
         <details>
-          <summary><a href="https://litesiem.ml/about" target="_blank">LiteSiem</a> - a <abbr title="Security Information and Event Management">SIEM</abbr> tool loosely based on <a href="https://www.dsiem.org/">DSIEM</a> </summary>
+          <summary>LiteSiem - a <abbr title="Security Information and Event Management">SIEM</abbr> tool loosely based on <a href="https://www.dsiem.org/">DSIEM</a> </summary>
 
           <p>
             <a href="https://litesiem.nvll.ga/" target="_blank">Demo</a> <br>
           </p>
 
           <p>
-            Login with <code>demo@litesiem.nvll.ga</code>, password <code>demouser</code>. 
+            Login with <code class="select-all">demo@litesiem.nvll.ga</code>, password <code class="select-all">demouser</code>. 
             Try triggering an alarm with the following <code>curl</code> requests:
 
-<pre><code>
-curl -H 'Content-Type: application/json' \
+<pre><code class="select-all">curl -H 'Content-Type: application/json' \
 -d '{"timestamp":"'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'", "title":"ICMP Ping", "dst_ip":"127.0.0.1", "sensor":"'"$(hostname)"'", "protocol":"ICMP", "product":"IDS", "plugin_id":42, "plugin_sid":42 }' \
 https://litesiem.nvll.ga/_events/logs.demo/?[1-10]  
 </code></pre>
@@ -60,12 +59,20 @@ https://litesiem.nvll.ga/_events/logs.demo/?[1-10]
             <a href="https://eduvod.nvll.ga/" target="_blank">Demo</a> <br>
           </p>
           
-          <p>Login with <code>demo@eduvod.co.ke</code>, password <code>iS9nQoW%QxPi</code>. </p>
+          <p>Login with <code class="select-all">demo@eduvod.co.ke</code>, password <code class="select-all">iS9nQoW%QxPi</code>. </p>
         </details>
 
         <details>
           <summary><a href="https://revr.ml/" target="_blank">Revr</a> - a paid web extension to autoclaim transcription jobs and notify users</summary>
           <p><a href="https://chrome.google.com/webstore/detail/revr/chneiopmephgdhblkkhbapmniboajmao" target="_blank">Chrome Webstore</a> (unmaintained)</p>
+        </details>
+        
+        <details>
+          <summary><a href="https://newchat.ga/" target="_blank">newchat.ga</a> - a PWA to start new WhatsApp chats</summary>
+          
+          <p>
+            <a href="https://gitlab.com/aphilas/newchat.ga" target="_blank">Source</a>
+          </p>
         </details>
         
         <details>
