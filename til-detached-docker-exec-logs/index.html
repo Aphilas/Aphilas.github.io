@@ -50,9 +50,9 @@
         
         <p>My Docker adventures haven't ended <a href="https://aphilas.github.io/til-python-output-buffering/">yet</a>, but I have run into another issue.</p>
 <p>If you have a running Docker Compose service, and then you use <code>docker compose exec -d</code>, how do you read the <code>stdout</code> of the <em>child</em> process? Note that this is analogous or even equivalent to running a Docker container and then using <code>docker run</code>.</p>
-<p>For example say you have the following:</p>
+<p>For example, say you have the following:</p>
 <pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span><br>  <span class="token key atrule">docker-exec</span><span class="token punctuation">:</span><br>    <span class="token key atrule">image</span><span class="token punctuation">:</span> busybox<span class="token punctuation">:</span><span class="token number">1.36</span><br>    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token string">"/bin/sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> <span class="token string">"--"</span><span class="token punctuation">,</span> <span class="token string">"echo Hello from Parent\n while true; do sleep 30; done;"</span> <span class="token punctuation">]</span></code></pre>
-<p>And you run the <em>main</em> service with <code>docker compose up</code> (optionally with the <code>-d</code> flag), you can see the logs with <code>docker compose logs</code> which yields:</p>
+<p>If you run the <em>main</em> service with <code>docker compose up</code> (optionally with the <code>-d</code> flag), you can see the logs with <code>docker compose logs</code> which yields:</p>
 <pre><code>[+] Running 1/1
  ⠿ Container docker-exec-docker-exec-1  Recreated                                                                                1.0s
 Attaching to docker-exec-docker-exec-1
@@ -70,7 +70,7 @@ root     31482 31459  0 15:05 ?        00:00:00 /bin/sh -c -- echo Hello from Pa
 $ ls -l /proc/31482/fd/1
 l-wx------ 1 root root 64 Feb  7 15:50 /proc/31482/fd/1 -&gt; 'pipe:[245565]'
 </code></pre>
-<p>On the hand, the <code>stdout</code> from the <em>child</em> process is sent to a pseudo-TTY:</p>
+<p>On the other hand, the <code>stdout</code> from the <em>child</em> process is sent to a pseudo-TTY:</p>
 <pre><code>$ ps -ef | grep Child
 root      2462 31459  0 15:11 pts/0    00:00:00 /bin/sh -c echo Hello from Child &amp;&amp; while true; do sleep 30; done;
 
