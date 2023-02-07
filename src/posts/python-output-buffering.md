@@ -2,7 +2,7 @@
 author: aphilas
 date: 2023-01-23
 title: "TIL: Python Output Buffering"
-categories: 
+tags: 
 - til
 - python
 ---
