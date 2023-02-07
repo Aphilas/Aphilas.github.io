@@ -11,7 +11,7 @@ My Docker adventures haven't ended [yet](https://aphilas.github.io/til-python-ou
 
 If you have a running Docker Compose service, and then you use `docker compose exec -d`, how do you read the `stdout` of the *child* process? Note that this is analogous or even equivalent to running a Docker container and then using `docker run`. 
 
-For example say you have the following:
+For example, say you have the following:
 
 ```yaml
 services:
@@ -20,7 +20,7 @@ services:
     command: [ "/bin/sh", "-c", "--", "echo Hello from Parent\n while true; do sleep 30; done;" ]
 ```
 
-And you run the *main* service with `docker compose up` (optionally with the `-d` flag), you can see the logs with `docker compose logs` which yields:
+If you run the *main* service with `docker compose up` (optionally with the `-d` flag), you can see the logs with `docker compose logs` which yields:
 
 ```
 [+] Running 1/1
@@ -51,7 +51,7 @@ $ ls -l /proc/31482/fd/1
 l-wx------ 1 root root 64 Feb  7 15:50 /proc/31482/fd/1 -> 'pipe:[245565]'
 ```
 
-On the hand, the `stdout` from the *child* process is sent to a pseudo-TTY:
+On the other hand, the `stdout` from the *child* process is sent to a pseudo-TTY:
 
 ```
 $ ps -ef | grep Child
