@@ -10,6 +10,7 @@ module.exports = function(config) {
   config.addWatchTarget('tailwindconfig.js')
   
   config.addPassthroughCopy({ 'assets': '.' })
+  config.addPassthroughCopy({ 'img': 'img' })
   config.addPassthroughCopy('src/css/!(tailwind).css')
   // eleventyConfig.addPassthroughCopy('src/img')
 
