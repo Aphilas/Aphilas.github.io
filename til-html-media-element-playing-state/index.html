@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Personal website">
+
+<title>Neville Omangi</title>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="stylesheet" href="/css/tailwind.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+<link href="https://unpkg.com/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
+
+</head>
+
+<body> 
+  <nav class="px-4">
+  <ul>
+    <li>
+      <a href="/" class="secondary">
+        <strong>Neville Omangi</strong>
+      </a>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="/#bio">Bio</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    
+    <li><a href="/posts">Blog</a></li>
+    <!--
+    <li><a 
+      href="https://docs.google.com/document/d/1r0hTXL7sNq7EnGPZNs5T8jXwqwEtJBMpi26Kk6EgkFQ/edit?usp=sharing"
+      class="external"
+    >Resume</a></li> -->
+  </ul>
+</nav>
+
+
+  <main class="container">
+    <section class="mx-auto max-w-[65ch] post">
+      <div>
+        <h1 class="">TIL: HTML Media Element Playing State</h1>
+        
+        <p>I am building a web radio player, a frontend to RadioBrowser dubbed <a href="https://luqaimat.top">Luqaimat</a>. I need to know the state of the media (playing, paused, buffering, stopped et cetera) so as to display the correct icons and titles, and to start/stop a visualization. It seems trivial, but at some point I would get the wrong state (e.g. naively assuming the media is stopped on receiving a <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/stalled_event"><code>stalled</code></a> event).</p>
+<h2>A state machine, sort of</h2>
+<p>It might be helpful to think of the state of the media player like a state machine. In TypeScript, these are the valid states:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">export</span> <span class="token keyword">enum</span> PlayingState <span class="token punctuation">{</span><br>  <span class="token constant">STOPPED</span> <span class="token operator">=</span> <span class="token string">"STOPPED"</span><span class="token punctuation">,</span><br>  <span class="token constant">PLAYING</span> <span class="token operator">=</span> <span class="token string">"PLAYING"</span><span class="token punctuation">,</span><br>  <span class="token constant">BUFFERING</span> <span class="token operator">=</span> <span class="token string">"BUFFERING"</span><span class="token punctuation">,</span><br>  <span class="token constant">PAUSED</span> <span class="token operator">=</span> <span class="token string">"PAUSED"</span><span class="token punctuation">,</span><br>  <span class="token constant">ERROR</span> <span class="token operator">=</span> <span class="token string">"ERROR"</span><span class="token punctuation">,</span><br><span class="token punctuation">}</span></code></pre>
+<p>Despite poring over the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#events">MDN HTMLMediaElement docs</a> I couldn't still understand some edge cases. The <a href="https://html.spec.whatwg.org/multipage/media.html">WHATWG standard</a> was very helpful in determining the exact state of the network/media after receiving certain events.</p>
+<p><img src="/img/html-media-state.svg" alt="HTML Media Element State Machine" title="HTML Media Element State Machine"></p>
+<p>I settled on the following: handle all DOM media events and state transitions in one function with a switch statement. This removed a lot of flakiness unlike my previous code where state transitions were made imperatively after certain user actions.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">handleMediaEvent</span><span class="token punctuation">(</span>event<span class="token operator">:</span> Event<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">switch</span> <span class="token punctuation">(</span>event<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">case</span> <span class="token string">"play"</span><span class="token operator">:</span> <span class="token comment">// Play triggered manually</span><br>    <span class="token keyword">case</span> <span class="token string">"playing"</span><span class="token operator">:</span> <span class="token comment">// Resume playing after buffering</span><br>      state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">PLAYING</span><span class="token punctuation">;</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>    <span class="token keyword">case</span> <span class="token string">"pause"</span><span class="token operator">:</span><br>      <span class="token keyword">if</span> <span class="token punctuation">(</span>sourceElem<span class="token operator">?.</span>src<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>        state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">PAUSED</span><span class="token punctuation">;</span><br>      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>        state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">STOPPED</span><span class="token punctuation">;</span><br>      <span class="token punctuation">}</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>    <span class="token keyword">case</span> <span class="token string">"waiting"</span><span class="token operator">:</span><br>      state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">BUFFERING</span><span class="token punctuation">;</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>    <span class="token keyword">case</span> <span class="token string">"ended"</span><span class="token operator">:</span><br>      state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">STOPPED</span><span class="token punctuation">;</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>    <span class="token keyword">case</span> <span class="token string">"error"</span><span class="token operator">:</span><br>      state <span class="token operator">=</span> PlayingState<span class="token punctuation">.</span><span class="token constant">ERROR</span><span class="token punctuation">;</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>    <span class="token keyword">default</span><span class="token operator">:</span><br>      <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Unhandled media event"</span><span class="token punctuation">,</span> event<span class="token punctuation">.</span>type<span class="token punctuation">)</span><span class="token punctuation">;</span><br>      <span class="token keyword">break</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br><span class="token punctuation">}</span></code></pre>
+<h2>Stopping streaming media</h2>
+<p>You might notice that we handle two states on <code>pause</code> - paused and stopped. HTML Media elements do not natively handle &quot;stop&quot; actions. Simply setting <code>player.currentTime = 0</code> keeps downloading the stream. Setting <code>player.src  = ''</code> on the other hand throws an error since the source is effectively set to the page's base url. The solution is to pause the media, and then remove the <code>src</code> attribute from the <code>&lt;source&gt;</code>/<code>&lt;audio&gt;</code>/<code>&lt;video&gt;</code> element to stop further network requests. Additionally, this ensures that if someone hits stop, they jump <em>to live</em> on play (as contrasted to pause where you resume from the previous position).</p>
+<hr>
+<p>Feel free to play around with <a href="https://luqaimat.top">luqaimat</a> and suggest features or report bugs.</p>
+<p>Do you know of a way simplify my logic? Would you want to shed more light on anything I have addressed? Let me know on <a href="https://mastodon.online/@aphilas">Mastodon</a> or shoot me an email at aphilas [underscore] [at] outlook [dot] com.</p>
+
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+  <p>
+    <small>  
+      <a href="https://mastodon.online/@aphilas">Mastodon</a>  • 
+      <a href="https://github.com/aphilas">GitHub</a> • 
+      <a href="mailto:nevilleomangi@gmail.com">Email</a> •   
+      <a href="https://www.linkedin.com/in/neville-omangi-62b290173/">LinkedIn</a>
+    </small>
+  </p>
+
+  <p>
+    <small>
+        <span class="inline-block rotate-180">&copy;</span>
+        2022 Neville Omangi. No rights reserved.
+    </small>
+  </p>
+</footer>
+
+</body>
+</html>
